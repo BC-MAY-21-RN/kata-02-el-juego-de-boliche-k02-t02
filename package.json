@@ -1,0 +1,24 @@
+{
+  "name": "kata-02-el-juego-de-boliche-k02-t02",
+  "version": "1.0.0",
+  "description": "![BrightCoders Logo](img/logo-bc.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --no-cache ./*",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BC-MAY-21-RN/kata-02-el-juego-de-boliche-k02-t02.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BC-MAY-21-RN/kata-02-el-juego-de-boliche-k02-t02/issues"
+  },
+  "homepage": "https://github.com/BC-MAY-21-RN/kata-02-el-juego-de-boliche-k02-t02#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
