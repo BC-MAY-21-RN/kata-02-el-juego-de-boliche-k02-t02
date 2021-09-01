@@ -1,68 +1,75 @@
 class Frame {
 
-    constructor() {
-        this.initialPins = 10;
-        this.firstTurnPins = 0;
-        this.secondTurnPins = 0;
-        this.isFirstTurn = true;
-        this.isFinished = false;
-        this.accumulatedPoints = 0;
-    }
+  constructor() {
+    this.initialPins = 10;
+    this.firstTurnPins = 0;
+    this.secondTurnPins = 0;
+    this.isFirstTurn = true;
+    this.isFinished = false;
+    this.accumulatedPoints = 0;
+  }
 
-    customPlay(knockedDownPins) {
-      if(this.isFinished) return;
-      if(this.isFirstTurn) {
-        this.firstTurnPins = knockedDownPins;
-        this.isFirstTurn = false;
-      } else {
-        this.secondTurnPins = knockedDownPins;
-        this.isFinished = true;
-      }
-
-      if(!this.isStrike()) return;
+  customPlay(knockedDownPins) {
+    if(this.isFinished) return;
+    if(this.isFirstTurn) {
+      this.firstTurnPins = knockedDownPins;
+      this.isFirstTurn = false;
+    } else {
+      this.secondTurnPins = knockedDownPins;
       this.isFinished = true;
     }
 
-    play() {
-      const remainingPins = this.initialPins - this.firstTurnPins;
-      const knockedDownPins = this.getRandom(remainingPins);
-      this.customPlay(knockedDownPins);
-    }
+    if(!this.isStrike()) return;
+    this.isFinished = true;
+  }
 
-    isFrameFinished() {
-      return this.isFinished;
-    }
+  play() {
+    const remainingPins = this.initialPins - this.firstTurnPins;
+    const knockedDownPins = this.getRandom(remainingPins);
+    this.customPlay(knockedDownPins);
+  }
 
-    isStrike() {
-      return this.firstTurnPins == 10;
-    }
-    
-    isSpare(){
-      return (this.firstTurnPins + this.secondTurnPins) == 10 ;
-    }
+  isFrameFinished() {
+    return this.isFinished;
+  }
 
-    getRandom(max){
-      return Math.floor(Math.random() * (max + 1));
-    }
+  isStrike() {
+    return this.firstTurnPins == 10;
+  }
+  
+  isSpare(){
+    return (this.firstTurnPins + this.secondTurnPins) == 10 ;
+  }
 
-    setAccumulatedPoints(score) {
-      this.accumulatedPoints = score;
-    }
+  getRandom(max){
+    return Math.floor(Math.random() * (max + 1));
+  }
 
-    getAccumulatedPoints(){
-      return this.accumulatedPoints;
-    }
+  setAccumulatedPoints(score) {
+    this.accumulatedPoints = score;
+  }
 
-    getTotalPins() {
-      const thirdTurnPins = this.thirdTurnPins || 0;
-      return this.firstTurnPins + this.secondTurnPins + thirdTurnPins;
-    }
+  getAccumulatedPoints(){
+    return this.accumulatedPoints;
+  }
 
-    handleLastFrame() {
-      if(this.isStrike() || this.isSpare()) {
-        this.thirdTurnPins = this.getRandom(this.initialPins);
-      }
+  getTotalPins() {
+    const thirdTurnPins = this.thirdTurnPins || 0;
+    return this.firstTurnPins + this.secondTurnPins + thirdTurnPins;
+  }
+
+  handleLastFrame() {
+    let remainingPins;
+    if(this.firstTurnPins == 10) {
+      remainingPins = this.initialPins;
+    } else {
+      remainingPins = this.initialPins - this.firstTurnPins;
     }
+    this.secondTurnPins = this.getRandom(remainingPins);
+    if(this.isStrike() || this.isSpare()) {
+      this.thirdTurnPins = this.getRandom(this.initialPins);
+    }
+  }
 
 }
 

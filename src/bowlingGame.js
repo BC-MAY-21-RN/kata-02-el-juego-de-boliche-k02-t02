@@ -46,13 +46,29 @@ class BowlingGame {
   }
 
   getNextFrameScore(frames, index) {
-      if(index == 9) return 0;
-      return frames[index + 1].getTotalPins();
+    if(index == 9) {
+      return frames[index].secondTurnPins;
+    }
+    if(index == 8) {
+      const lastFrame = frames[index + 1];
+      return lastFrame.firstTurnPins;
+    }
+    return frames[index + 1].getTotalPins();
   }
 
   getSecondNextFrameScore(frames, index) {
-      if(index == 8 || index == 9) return 0;
-      return frames[index + 2].getTotalPins();
+    if(index == 9) {
+      return frames[index].thirdTurnPins || 0;
+    }
+    if(index == 8) {
+      const lastFrame = frames[index + 1];
+      return lastFrame.secondTurnPins;
+    }
+    if(index == 7) {
+      const lastFrame = frames[index + 2];
+      return lastFrame.firstTurnPins;
+    }
+    return frames[index + 2].getTotalPins();
   }
 
 }
