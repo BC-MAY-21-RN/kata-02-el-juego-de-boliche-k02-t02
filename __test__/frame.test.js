@@ -2,27 +2,28 @@
 const Frame = require('../src/frame');
 
 describe('Frame', () => {
+  let frame;
+  beforeEach(async () => {
+    frame = new Frame();
+  });
+  
   test('should have finished', () => {
-    const frame = new Frame();
     frame.play();
     frame.play();
-    expect(frame.isFinished()).toBe(true);
+    expect(frame.isFrameFinished()).toBe(true);
   });
 
   test('shouldnt have finished', () => {
-    const frame = new Frame();
     frame.customPlay(4);
-    expect(frame.isFinished()).toBe(false);
+    expect(frame.isFrameFinished()).toBe(false);
   });
 
   test('should be strike', () => {
-    const frame = new Frame();
     frame.customPlay(10);
     expect(frame.isStrike()).toBe(true);
   });
 
   test('should be spare', () => {
-    const frame = new Frame();
     frame.customPlay(4);
     frame.customPlay(6);
     expect(frame.isSpare()).toBe(true);
