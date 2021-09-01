@@ -1,5 +1,4 @@
-function test() {
-  console.log('xd');
-}
+const BowlingGame = require('./bowlingGame');
 
-test();
+const game = new BowlingGame();
+game.startGame();

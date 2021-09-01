@@ -6,6 +6,7 @@ class Frame {
         this.secondTurnPins = 0;
         this.isFirstTurn = true;
         this.isFinished = false;
+        this.accumulatedPoints = 0;
     }
 
     customPlay(knockedDownPins) {
@@ -26,50 +27,6 @@ class Frame {
       const remainingPins = this.initialPins - this.firstTurnPins;
       const knockedDownPins = this.getRandom(remainingPins);
       this.customPlay(knockedDownPins);
-       /*
-        1. Comienza el programa
-        2. Se "ejecuta" el frame 1
-        3. Se realiza una tirada en el frame 1
-        4. { Se realiza el procesamiento del frame }
-        5. Se avanza al siguiente frame y se repite todo
-
-        Problema:
-        - El puntaje
-        Si en el frame n se hizo un strike, entonces no se puede calcular el puntaje en ese
-        momento, el puntaje depende de los siguientes dos frames
-
-        Solución:
-        Iteracion 1:
-        El procesamiento del frame unicamente sea derribar bolos
-        Frame 1 -> Strike -> Se almacena que fue strike y el puntaje no se calcula
-        Frame 2 -> T1: 3, T2: 5 -> Se almacena que se derribaron 8 bolos y se almacena
-        Frame 3 -> Strike
-        Frame 4 -> T1: 4, 
-        .
-        .
-        .
-
-        Iteracion 2:
-        Frame 1 -> Vemos que fue strike entonces el puntaje es 10 + los siguientes dos frames -> 30
-        Frame 2 -> Frame anterior + el frame 2
-        Frame 3 -> Frame anterior + 10 + los siguiente dos
-
-        Necesitamos:
-        - Clase que contenga a los 10 frames y los procese
-
-        frame.play();
-        -> Diferenciar Turno 1, Turno 2
-        -> Si no no se hizo un strike avanzar al turno 2
-        -> Almacenar los bolos derribados
-        -> Debe almacenar su estado (terminado, no terminado)
-        
-        for(recorre la lista de frames) {
-          if(frame.noHaTerminado) {
-            frame.play();
-          }
-        }
-        
-       */
     }
 
     isFrameFinished() {
@@ -87,6 +44,19 @@ class Frame {
     getRandom(max){
       return Math.floor(Math.random() * (max + 1));
     }
+
+    setAccumulatedPoints(score) {
+      this.accumulatedPoints = score;
+    }
+
+    getAccumulatedPoints(){
+      return this.accumulatedPoints;
+    }
+
+    getTotalPins() {
+      return this.firstTurnPins + this.secondTurnPins;
+    }
+
 }
 
 module.exports = Frame;
