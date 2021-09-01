@@ -21,6 +21,7 @@ class BowlingGame {
           frame.play();
         }
     });
+    frames[9].handleLastFrame();
   }
 
   calculatePoints(frames) {
@@ -31,7 +32,7 @@ class BowlingGame {
       if(frame.isStrike()) {
         score += frame.firstTurnPins + nextFramePins + secondFramePins;
       } else if(frame.isSpare()) {
-        score += frame.firstTurnPins + nextFramePins;
+        score += frame.getTotalPins() + nextFramePins;
       } else {
         score += frame.getTotalPins();
       }

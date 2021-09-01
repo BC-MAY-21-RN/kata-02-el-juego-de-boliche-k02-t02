@@ -54,7 +54,14 @@ class Frame {
     }
 
     getTotalPins() {
-      return this.firstTurnPins + this.secondTurnPins;
+      const thirdTurnPins = this.thirdTurnPins || 0;
+      return this.firstTurnPins + this.secondTurnPins + thirdTurnPins;
+    }
+
+    handleLastFrame() {
+      if(this.isStrike() || this.isSpare()) {
+        this.thirdTurnPins = this.getRandom(this.initialPins);
+      }
     }
 
 }
